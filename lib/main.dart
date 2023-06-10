@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'bloc/app_bloc.dart';
+import 'bloc/app_event.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +15,12 @@ class MyApp extends StatelessWidget {
       title: '圖片展示首頁',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        //backgroundColor: Colors.black,
       ),
-      home: HomePage(),
+      home: BlocProvider(
+        create: (context) => AppBloc(),
+        child: HomePage(),
+      ),
     );
   }
 }
@@ -22,11 +29,10 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _pages = <Widget>[
-    const ImageGalleryPage(),
+    ImageGalleryPage(),
     Text('分頁 1'),
     Text('分頁 2'),
   ];
@@ -92,4 +98,3 @@ class ImageGalleryPage extends StatelessWidget {
     );
   }
 }
-
